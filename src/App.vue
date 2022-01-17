@@ -1,19 +1,33 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id="app">
+    <ul>
+      <li v-for="(personaje, i) in personajes" :key="i">
+        <img :src="getPersonajes(personaje)"/>
+        <p>{{ personaje.name }}</p>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  data() {
+    return {
+      personajes: [
+        { id: 1, name: "Rick Sanchez" },
+        { id: 2, name: "Morty Smith" },
+        { id: 3, name: "Summer Smith" },
+        { id: 4, name: "Beth Smith" },
+      ],
+    };
+  },
+  methods: {
+  getPersonajes(personaje) {
+      return `https://rickandmortyapi.com/api/character/avatar/${personaje.id}.jpeg`;
+      },
+    },
+  };
 </script>
 
 <style>
@@ -24,5 +38,28 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+body {
+  background: url("https://rickandmortypod.com/wp-content/uploads/2018/11/cropped-RM_page-header_background1-3.png")
+    no-repeat center center fixed;
+  background-size: cover;
+}
+
+ul li {
+  display: flex;
+  flex-direction: row;
+  vertical-align: middle;
+}
+img {
+  height: 200px;
+  border-radius: 50%;
+  padding-top:10px;
+}
+ul li p {
+  color: green;
+  font-size: 20px;
+  font-weight: 900;
+  text-align: center;
 }
 </style>
